@@ -27,11 +27,11 @@ const translations = {
     'hero.description': "I'm a software engineer with 5 years of experience in both backend and frontend development. I specialize in building high-quality web applications with modern JavaScript frameworks.",
     'hero.cta': 'Check out my work',
     
-    'projects.title': 'Some Things I've Built',
+    'projects.title': "Some Things I've Built",
     'projects.viewAll': 'View All Projects',
     'projects.viewProject': 'View Project',
     
-    'companies.title': 'Where I've Worked',
+    'companies.title': "Where I've Worked",
     'companies.viewAll': 'View All Companies',
     
     'about.title': 'About Me',
