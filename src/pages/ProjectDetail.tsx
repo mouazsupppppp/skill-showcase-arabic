@@ -6,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { projects } from '@/data/projects';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,6 +51,16 @@ const ProjectDetail = () => {
               </a>
             )}
           </div>
+
+          {project.image && (
+            <div className="mb-8 rounded-lg overflow-hidden border-2 border-lightnavy">
+              <img 
+                src={project.image} 
+                alt={project.name} 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          )}
           
           <div className="bg-lightnavy rounded-lg p-6 mb-8">
             <p className="text-lightslate text-lg mb-6">
@@ -98,6 +109,15 @@ const ProjectDetail = () => {
                     key={relatedProject.id} 
                     className="bg-lightnavy rounded-lg overflow-hidden card-hover"
                   >
+                    {relatedProject.image && (
+                      <div className="w-full h-32 overflow-hidden">
+                        <img 
+                          src={relatedProject.image} 
+                          alt={relatedProject.name} 
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                    )}
                     <div className="p-4">
                       <h3 className="text-lg font-medium text-lightestslate mb-2">
                         {relatedProject.name}

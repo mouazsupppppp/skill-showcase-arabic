@@ -7,6 +7,7 @@ import { projects } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from "@/components/ui/card";
 
 const Projects = () => {
   const { language, t } = useLanguage();
@@ -96,13 +97,22 @@ const Projects = () => {
                 key={project.id} 
                 className="bg-lightnavy rounded-lg overflow-hidden card-hover h-full"
               >
+                {project.image && (
+                  <div className="w-full h-48 overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.name} 
+                      className="w-full h-full object-cover object-top transition-transform hover:scale-105"
+                    />
+                  </div>
+                )}
                 <div className="p-6 flex flex-col h-full">
                   <h3 className="text-xl font-medium text-lightestslate mb-2">{project.name}</h3>
-                  <p className="text-lightslate mb-4 flex-grow">
+                  <p className="text-lightslate mb-4 flex-grow line-clamp-3">
                     {language === 'en' ? project.description.en : project.description.ar}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, idx) => (
+                    {project.tech.slice(0, 3).map((tech, idx) => (
                       <span 
                         key={idx} 
                         className="text-xs font-mono text-lightestslate bg-navyblue px-2 py-1 rounded"
@@ -110,6 +120,9 @@ const Projects = () => {
                         {tech}
                       </span>
                     ))}
+                    {project.tech.length > 3 && (
+                      <span className="text-xs font-mono text-lightslate">+{project.tech.length - 3} more</span>
+                    )}
                   </div>
                   <div className="flex justify-between items-center mt-4">
                     <span className="text-sm text-teal">{project.company}</span>
