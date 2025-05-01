@@ -37,23 +37,36 @@ const Companies = () => {
               >
                 <Link to={`/companies/${company.id}`}>
                   <div className="bg-lightnavy rounded-lg p-6 mb-4 hover:bg-lightestnavy transition-colors">
-                    <div className="flex flex-col md:flex-row justify-between md:items-center mb-4">
-                      <h2 className="text-2xl font-bold text-lightestslate mb-2 md:mb-0">
-                        {company.name}
-                      </h2>
-                      <span className="text-teal">{company.period}</span>
-                    </div>
-                    
-                    <p className="text-slate mb-4">
-                      {company.location} • {company.workType}
-                    </p>
-                    
-                    <div className="text-lightslate mb-4">
-                      {language === 'en' ? company.description.en : company.description.ar}
-                    </div>
-                    
-                    <div className="text-teal font-medium">
-                      {company.role}
+                    <div className="flex flex-col md:flex-row gap-6 mb-4">
+                      {company.logo && (
+                        <div className="w-24 h-24 md:w-20 md:h-20 flex items-center justify-center bg-white rounded-lg p-3 overflow-hidden">
+                          <img 
+                            src={company.logo} 
+                            alt={`${company.name} logo`}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-grow">
+                        <div className="flex flex-col md:flex-row justify-between md:items-center">
+                          <h2 className="text-2xl font-bold text-lightestslate mb-2 md:mb-0">
+                            {company.name}
+                          </h2>
+                          <span className="text-teal">{company.period}</span>
+                        </div>
+                        
+                        <p className="text-slate mb-4">
+                          {company.location} • {company.workType}
+                        </p>
+                        
+                        <div className="text-lightslate mb-4">
+                          {language === 'en' ? company.description.en : company.description.ar}
+                        </div>
+                        
+                        <div className="text-teal font-medium">
+                          {company.role}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -69,14 +82,25 @@ const Companies = () => {
                         <Link 
                           to={`/projects/${project.id}`} 
                           key={project.id} 
-                          className="bg-lightnavy rounded-lg p-4 hover:bg-lightestnavy transition-colors"
+                          className="bg-lightnavy rounded-lg overflow-hidden hover:bg-lightestnavy transition-colors"
                         >
-                          <h4 className="text-lg font-medium text-lightestslate mb-2">
-                            {project.name}
-                          </h4>
-                          <p className="text-slate text-sm">
-                            {project.tech.slice(0, 2).join(', ')}
-                          </p>
+                          {project.image && (
+                            <div className="w-full h-32 overflow-hidden">
+                              <img 
+                                src={project.image} 
+                                alt={project.name} 
+                                className="w-full h-full object-cover object-top"
+                              />
+                            </div>
+                          )}
+                          <div className="p-4">
+                            <h4 className="text-lg font-medium text-lightestslate mb-2">
+                              {project.name}
+                            </h4>
+                            <p className="text-slate text-sm">
+                              {project.tech.slice(0, 2).join(', ')}
+                            </p>
+                          </div>
                         </Link>
                       ))}
                     </div>

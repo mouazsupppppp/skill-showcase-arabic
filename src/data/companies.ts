@@ -2,6 +2,7 @@
 export interface Company {
   id: string;
   name: string;
+  logo?: string;
   location: string;
   period: string;
   workType: string;
@@ -21,6 +22,7 @@ export const companies: Company[] = [
   {
     id: "vega-sds",
     name: "VEGA SDS",
+    logo: "/lovable-uploads/ac5902ec-3f22-4efb-8bce-bd46693e7df3.png",
     location: "Turkey",
     period: "2024/May - Present",
     workType: "Remote",
@@ -46,6 +48,7 @@ export const companies: Company[] = [
   {
     id: "sheen-value",
     name: "Sheen Value",
+    logo: "/lovable-uploads/69a5f13b-b0ae-4220-9123-4fb052a5dd89.png",
     location: "UAE Dubai",
     period: "2022/Apr - 2024/Oct",
     workType: "On Site",
@@ -117,6 +120,7 @@ export const companies: Company[] = [
   {
     id: "protech-group",
     name: "ProTech Group/ProSoft",
+    logo: "/lovable-uploads/5c5f31c1-0349-4609-9f7b-4d67cbfe3bde.png",
     location: "Damascus",
     period: "2021/July - 2022/Feb",
     workType: "On Site",

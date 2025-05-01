@@ -6,7 +6,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { companies } from '@/data/companies';
 import { projects } from '@/data/projects';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const CompanyDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,14 +40,27 @@ const CompanyDetail = () => {
         
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-lightestslate mb-4">
-              {company.name}
-            </h1>
-            
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-slate mb-6">
-              <div>{company.location}</div>
-              <div>{company.period}</div>
-              <div>{company.workType}</div>
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+              {company.logo && (
+                <div className="w-32 h-32 flex items-center justify-center bg-white rounded-lg p-4 overflow-hidden">
+                  <img 
+                    src={company.logo} 
+                    alt={`${company.name} logo`}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+              )}
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-lightestslate mb-4">
+                  {company.name}
+                </h1>
+                
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-slate mb-6">
+                  <div>{company.location}</div>
+                  <div>{company.period}</div>
+                  <div>{company.workType}</div>
+                </div>
+              </div>
             </div>
             
             <div className="bg-lightnavy rounded-lg p-6 mb-6">
@@ -85,15 +99,24 @@ const CompanyDetail = () => {
                     key={project.id} 
                     className="bg-lightnavy rounded-lg overflow-hidden card-hover"
                   >
+                    {project.image && (
+                      <div className="w-full h-48 overflow-hidden">
+                        <img 
+                          src={project.image} 
+                          alt={project.name} 
+                          className="w-full h-full object-cover object-top transition-transform hover:scale-105"
+                        />
+                      </div>
+                    )}
                     <div className="p-6">
                       <h3 className="text-xl font-medium text-lightestslate mb-2">
                         {project.name}
                       </h3>
-                      <p className="text-lightslate mb-4">
+                      <p className="text-lightslate mb-4 line-clamp-3">
                         {language === 'en' ? project.description.en : project.description.ar}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {project.tech.map((tech, idx) => (
+                        {project.tech.slice(0, 3).map((tech, idx) => (
                           <span 
                             key={idx} 
                             className="text-xs font-mono text-lightestslate bg-navyblue px-2 py-1 rounded"

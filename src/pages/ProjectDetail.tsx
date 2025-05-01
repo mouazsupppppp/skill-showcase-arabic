@@ -4,9 +4,9 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { projects } from '@/data/projects';
+import { companies } from '@/data/companies';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +22,9 @@ const ProjectDetail = () => {
   }, [project, navigate]);
   
   if (!project) return null;
+
+  // Find the company associated with this project
+  const company = companies.find(c => c.name === project.company);
 
   return (
     <MainLayout>
@@ -78,12 +81,31 @@ const ProjectDetail = () => {
               ))}
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-teal font-medium mb-2">
                   {language === 'en' ? 'Company' : 'الشركة'}
                 </h3>
-                <p className="text-lightslate">{project.company}</p>
+                <div className="flex items-center gap-3">
+                  {company && company.logo && (
+                    <div className="w-10 h-10 bg-white rounded flex items-center justify-center p-1">
+                      <img 
+                        src={company.logo} 
+                        alt={company.name}
+                        className="max-w-full max-h-full object-contain" 
+                      />
+                    </div>
+                  )}
+                  <p className="text-lightslate">{project.company}</p>
+                </div>
+                {company && (
+                  <Link 
+                    to={`/companies/${company.id}`}
+                    className="text-teal text-sm hover:underline mt-2 inline-block"
+                  >
+                    {language === 'en' ? 'View Company Details' : 'عرض تفاصيل الشركة'}
+                  </Link>
+                )}
               </div>
               <div>
                 <h3 className="text-teal font-medium mb-2">
